@@ -71,6 +71,88 @@ Designing deterministic switching architectures with configurable timing, dead-t
 
 
 
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!--                    PROJECT SPECIFICATION                       -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+
+<h2 align="center">
+  ⚙️ PROJECT SPECIFICATION
+</h2>
+
+<p align="center">
+  <b>FPGA-Based Embedded Digital Control System</b>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/FPGA-DE2-red?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Language-VHDL--2008-orange?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Clock-50%20MHz-purple?style=for-the-badge" />
+</p>
+
+---
+
+<table align="center">
+  <thead>
+    <tr>
+      <th align="left">🔧 SPECIFICATION</th>
+      <th align="left">⚡ SELECTION</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><b>Project Type</b></td>
+      <td>FPGA / Embedded Digital Control</td>
+    </tr>
+    <tr>
+      <td><b>Hardware Platform</b></td>
+      <td>Altera / Terasic DE2</td>
+    </tr>
+    <tr>
+      <td><b>Programming Language</b></td>
+      <td>VHDL-2008</td>
+    </tr>
+    <tr>
+      <td><b>Main Clock Frequency</b></td>
+      <td>50 MHz</td>
+    </tr>
+    <tr>
+      <td><b>FPGA Development Software</b></td>
+      <td>Intel Quartus</td>
+    </tr>
+    <tr>
+      <td><b>Simulation Tools</b></td>
+      <td>ModelSim / GHDL</td>
+    </tr>
+    <tr>
+      <td><b>Waveform Viewer</b></td>
+      <td>GTKWave</td>
+    </tr>
+    <tr>
+      <td><b>Control Architecture</b></td>
+      <td>Moore Finite State Machine (FSM)</td>
+    </tr>
+    <tr>
+      <td><b>Advanced Safety Features</b></td>
+      <td>Dead-Time Insertion / Fault Latching</td>
+    </tr>
+  </tbody>
+</table>
+
+---
+
+<p align="center">
+  <b>DESIGNED FOR RELIABLE • DETERMINISTIC • SAFE DIGITAL CONTROL</b>
+</p>
+
+<p align="center">
+  <code>FPGA</code> ⚡ <code>VHDL</code> ⚡ <code>FSM</code> ⚡ <code>SAFETY LOGIC</code>
+</p>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!--                 END OF PROJECT SPECIFICATION                   -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+
 Abstract
 
 Power electronic converters constitute essential components of modern electrical and electronic systems, including renewable energy installations, electric vehicles, industrial motor drives, battery energy storage systems, and high-efficiency energy conversion applications.
