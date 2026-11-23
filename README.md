@@ -69,154 +69,147 @@ Designing deterministic switching architectures with configurable timing, dead-t
 
 </div>
 
-⚡ PROJECT OVERVIEW
-
-POWERCORE-X is an advanced FPGA-based digital control architecture developed to generate precisely timed complementary gate-control signals for power converter switching applications.
-
-Built using VHDL-2008, the system combines finite state machine control, programmable timing counters, configurable dead-time insertion, output interlocking, and latched fault protection.
-
-The architecture evolves from a conventional four-phase Moore FSM waveform generator into a modular and extensible digital switching controller.
-
-CORE ENGINEERING PARAMETERS
 
 
-CORE ENGINEERING PARAMETERS
+Abstract
 
-Parameter
+Power electronic converters constitute essential components of modern electrical and electronic systems, including renewable energy installations, electric vehicles, industrial motor drives, battery energy storage systems, and high-efficiency energy conversion applications.
 
-Specification
+The performance and reliability of these systems depend significantly on the accuracy, synchronization, and safety of the switching signals applied to semiconductor power devices.
 
-Project Architecture
+This project presents POWERCORE-X, an FPGA-based digital control architecture designed to generate accurately timed complementary gate-control signals for power converter switching stages.
 
-FPGA-Based Digital Controller
+The proposed architecture is developed using VHDL-2008 and is based on a synchronous Moore Finite State Machine (FSM). It extends a conventional four-phase waveform generator through modular timing management, configurable dead-time insertion, output interlocking, fault detection, and latched shutdown mechanisms.
 
-Hardware Clock
+The reference architecture operates from a 50 MHz FPGA clock and implements a four-phase switching sequence with durations of 10 µs, 30 µs, 10 µs, and 50 µs.
 
-50 MHz
+The development methodology includes engineering requirements analysis, mathematical timing calculations, RTL architecture design, VHDL implementation, automated testbench development, functional simulation, and preparation for FPGA hardware implementation.
 
-Clock Period
+The project aims to establish a reusable and extensible digital switching controller that demonstrates the application of FPGA technology to deterministic and safety-oriented power electronics control.
 
-20 ns
+Keywords: FPGA, VHDL-2008, Embedded Digital Control, Power Electronics, Moore FSM, Gate Signal Generation, Dead-Time Insertion, Fault Protection, RTL Design, Hardware Verification.
 
-Control Architecture
+<h2 align="center">02 │ INTRODUCTION</h2>
 
-Moore Finite State Machine
+<p align="center">
+  <strong>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</strong>
+</p>
 
-Hardware Description Language
+2.1 Background
 
-VHDL-2008
+The increasing demand for efficient, reliable, and controllable electrical energy conversion systems has made power electronics one of the most important areas of modern electrical engineering.
 
-Switching Intervals
+Power electronic converters are widely employed in:
 
-10 / 30 / 10 / 50 µs
+Renewable energy generation systems.
 
-Configurable Dead-Time
+Electric vehicles and charging infrastructure.
 
-200 ns
+Industrial motor drives.
 
-Protection Mechanism
+Battery management and energy storage.
 
-Fault Latching
+Uninterruptible power supplies.
 
-Output Architecture
+Industrial automation.
 
-Complementary Digital Signals
+High-frequency switching power supplies.
 
-<div align="center">
+A fundamental component of these systems is the switching control mechanism.
 
-◈ THE FOUR-PHASE SWITCHING ENGINE
+Semiconductor devices such as Metal-Oxide-Semiconductor Field-Effect Transistors (MOSFETs) and Insulated-Gate Bipolar Transistors (IGBTs) require carefully coordinated control signals to determine their conduction and blocking states.
 
-100 µs Reference Switching Sequence
+Incorrect switching timing can cause undesirable electrical behavior, increased switching losses, and potentially destructive short-circuit conditions.
 
-<img src="https://img.shields.io/badge/PHASE_01-10_%CE%BCs-42E8FF?style=for-the-badge"/>
-<img src="https://img.shields.io/badge/PHASE_02-30_%CE%BCs-9B7BFF?style=for-the-badge"/>
-<img src="https://img.shields.io/badge/PHASE_03-10_%CE%BCs-42E8FF?style=for-the-badge"/>
-<img src="https://img.shields.io/badge/PHASE_04-50_%CE%BCs-FF9B45?style=for-the-badge"/>
+For this reason, digital switching controllers must provide predictable timing, coordinated output transitions, and appropriate protection mechanisms.
 
-</div>
+2.2 FPGA Technology in Digital Control
 
-DIGITAL SWITCHING SEQUENCE
+Field-Programmable Gate Arrays (FPGAs) offer a powerful platform for implementing deterministic digital control systems.
 
-TIME       0       10              40      50                      100 µs
-           |--------|---------------|-------|------------------------|
+Unlike conventional software-based controllers, FPGA devices implement digital logic directly in configurable hardware resources.
 
-SIG1       ████████                 ████████
-           HIGH                     HIGH
+Their main characteristics include:
 
-SIG2               ███████████████         ████████████████████████
-                   HIGH                     HIGH
+Parallel hardware execution.
 
-STATE      PHASE_1  PHASE_2         PHASE_3 PHASE_4
+Deterministic logic operation.
 
+Clock-cycle-level timing control.
 
-The reference sequence above represents the original active switching intervals. In the enhanced architecture, dead-time intervals are inserted between transitions.
+Reconfigurable digital architecture.
 
-<div align="center">
+Hardware implementation of state machines.
 
-◈ SYSTEM DESIGN PHILOSOPHY
+Dedicated counters and registers.
 
-<img src="https://img.shields.io/badge/01-TIMING%20PRECISION-42E8FF?style=for-the-badge"/>
-<img src="https://img.shields.io/badge/02-SAFE%20SWITCHING-9B7BFF?style=for-the-badge"/>
-<img src="https://img.shields.io/badge/03-FAULT%20MANAGEMENT-FF9B45?style=for-the-badge"/>
+Flexible input/output interfaces.
 
-A modular architecture. A deterministic switching engine. A safety-oriented design.
+FPGAs are therefore suitable for applications requiring precise digital timing and coordinated switching behavior.
 
-</div>
+2.3 Project Introduction
 
-🧬 SYSTEM ARCHITECTURE
+POWERCORE-X investigates the design of an FPGA-based digital controller for generating complementary switching signals.
 
-                ┌──────────────────────┐
-                │    50 MHz FPGA CLK   │
-                └──────────┬───────────┘
-                           │
-                ┌──────────▼───────────┐
-                │   TIMING MANAGER     │
-                │  Counters & Timers   │
-                └──────────┬───────────┘
-                           │
-                ┌──────────▼───────────┐
-                │     MOORE FSM        │
-                │  Four-Phase Control  │
-                └──────────┬───────────┘
-                           │
-                ┌──────────▼───────────┐
-                │    DEAD-TIME UNIT    │
-                │   200 ns Reference   │
-                └──────────┬───────────┘
-                           │
-                ┌──────────▼───────────┐
-                │   FAULT MANAGEMENT   │
-                │    Output Interlock  │
-                └──────────┬───────────┘
-                           │
-                   ┌───────┴───────┐
-                   │               │
-             ┌─────▼─────┐   ┌─────▼─────┐
-             │   SIG1    │   │   SIG2    │
-             │  GATE A   │   │  GATE B   │
-             └───────────┘   └───────────┘
+The project originates from a conventional four-state Moore FSM waveform generator.
 
-🛡️ SAFETY-FIRST DIGITAL CONTROL
+The original architecture produces two non-overlapping control signals according to a predefined switching sequence.
 
-The primary digital safety invariant is:
+The proposed POWERCORE-X architecture extends this baseline through additional digital control and protection functions:
 
-[
-Sig1 \land Sig2 = 0
-]
+Configurable switching intervals.
 
-The architecture is designed to ensure that complementary outputs are never simultaneously asserted.
-
-Additional mechanisms include:
-
-Configurable dead-time insertion.
+Dead-time insertion.
 
 Output mutual-exclusion logic.
 
-Fault detection and latching.
+Enable and reset management.
 
-Controlled activation and reset.
+Fault detection.
 
-Safe output shutdown.
+Fault-state latching.
 
-Engineering note: Digital interlocking is not a substitute for independent gate-driver protection, electrical isolation, and hardware overcurrent protection.
+Modular RTL implementation.
+
+Automated functional verification.
+
+The objective is to move from a basic waveform generator toward a structured digital switching controller suitable for further engineering investigation.
+
+<h2 align="center">03 │ PROBLEM STATEMENT</h2>
+
+<p align="center">
+  <strong>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</strong>
+</p>
+
+3.1 Engineering Problem
+
+A basic FSM-based waveform generator can produce predetermined switching sequences. However, practical power converter control requires additional mechanisms to coordinate switching transitions and respond to abnormal conditions.
+
+The main engineering challenges include:
+
+Accurate generation of switching intervals.
+
+Prevention of simultaneous activation of complementary outputs.
+
+Controlled insertion of dead-time.
+
+Reliable enable and reset behavior.
+
+Detection of fault conditions.
+
+Prevention of unintended automatic restart.
+
+Verification of normal and abnormal operating scenarios.
+
+3.2 Central Research Question
+
+How can an FPGA-based digital controller be designed to generate accurately timed complementary switching signals while integrating configurable timing, dead-time management, output interlocking, and fault protection?
+
+3.3 Proposed Solution
+
+POWERCORE-X addresses this problem through a modular VHDL architecture based on synchronous digital logic.
+
+The proposed system integrates a clock-driven timing manager, a Moore finite state machine, a programmable dead-time mechanism, a fault-management block, and complementary output logic.
+
+
 
