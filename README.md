@@ -285,6 +285,9 @@ The individual state durations represent the following percentages of the comple
 | S3 | 50 µs | 50% |
 | **Total** | **100 µs** | **100%** |
 
+
+
+![image alt](https://github.com/BenkhiraAhmedBaderEddine1/POWERCORE-X/blob/4e92777e92f93efafa1fa7a89328aa17e7fea340/Screenshot%202026-11-24%20001656.png)
 ---
 
 ### 🔵 1.4 Baseline Design and Research Extensions
