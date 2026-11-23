@@ -2,13 +2,6 @@
 MASTER'S LEVEL DIGITAL DESIGN AND FPGA ENGINEERING PROJECT   --- FPGA-Based Programmable Power Converter Gate-Signal Controller with Dead-Time Insertion and Fault Protection
 
 
-
-msgateacademy.com
-
-
-هذه هي الهوية البصرية التي أقترحها للمشروع.
-2. الكود الرئيسي — README.md
-انسخ الكود التالي وضعه في بداية ملف README.md في GitHub.
  <div align="center">
 
 <img src="https://capsule-render.vercel.app/api?type=rect&height=170&color=0:080D24,45:152B50,100:432A73&text=POWERCORE-X&fontColor=FFFFFF&fontSize=55&fontAlignY=45&desc=FPGA%20%7C%20POWER%20ELECTRONICS%20%7C%20DIGITAL%20CONTROL&descSize=13&descAlignY=72&animation=fadeIn" width="100%" />
