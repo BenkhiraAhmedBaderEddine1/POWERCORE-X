@@ -247,27 +247,33 @@ The controller continuously repeats the sequence in the following order:
 
 The total operating period is determined by the sum of the four state durations:
 
-\[
+
+
+$$
 T_{\text{period}} = T_{S0}+T_{S1}+T_{S2}+T_{S3}
-\]
+$$
 
-\[
+Substituting the reference timing values:
+
+$$
 T_{\text{period}} = 10+30+10+50
-\]
+$$
 
-\[
+Therefore, the complete sequence period is:
+
+$$
 \boxed{T_{\text{period}}=100\ \mu s}
-\]
+$$
 
 The corresponding repetition frequency is:
 
-\[
+$$
 f=\frac{1}{T_{\text{period}}}
-\]
+$$
 
-\[
+$$
 \boxed{f=10\text{ kHz}}
-\]
+$$
 
 The individual state durations represent the following percentages of the complete cycle:
 
