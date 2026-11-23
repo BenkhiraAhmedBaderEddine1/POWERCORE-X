@@ -71,6 +71,9 @@ Designing deterministic switching architectures with configurable timing, dead-t
 
 
 
+![image alt](https://github.com/BenkhiraAhmedBaderEddine1/POWERCORE-X/blob/8cd805e34b22954aef416da85b5f4ad2e0dfb827/Screenshot%202026-11-24%20001656.png)
+
+
 
 <!-- ═══════════════════════════════════════════════════════════════ -->
 <!--                    PROJECT SPECIFICATION                       -->
