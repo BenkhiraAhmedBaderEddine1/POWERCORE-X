@@ -1,7 +1,3 @@
-# POWERCORE-X
-MASTER'S LEVEL DIGITAL DESIGN AND FPGA ENGINEERING PROJECT   --- FPGA-Based Programmable Power Converter Gate-Signal Controller with Dead-Time Insertion and Fault Protection
-
-
 
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" width="1200" height="520">
   <defs>
@@ -11,17 +7,17 @@ MASTER'S LEVEL DIGITAL DESIGN AND FPGA ENGINEERING PROJECT   --- FPGA-Based Prog
       <stop offset="100%" stop-color="#080d20"/>
     </linearGradient>
 
-    <linearGradient id="chip" x1="0" y1="0" x2="1" y2="1">
+  
+  <linearGradient id="chip" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0%" stop-color="#182e52"/>
       <stop offset="100%" stop-color="#091326"/>
     </linearGradient>
 
-    <linearGradient id="electric">
+  <linearGradient id="electric">
       <stop offset="0%" stop-color="#00eaff"/>
       <stop offset="50%" stop-color="#7b61ff"/>
       <stop offset="100%" stop-color="#00eaff"/>
     </linearGradient>
-
     <filter id="glow">
       <feGaussianBlur stdDeviation="5" result="blur"/>
       <feMerge>
@@ -29,7 +25,6 @@ MASTER'S LEVEL DIGITAL DESIGN AND FPGA ENGINEERING PROJECT   --- FPGA-Based Prog
         <feMergeNode in="SourceGraphic"/>
       </feMerge>
     </filter>
-
     <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
       <path d="M40 0H0V40" fill="none" stroke="#28436b" stroke-width="0.7" opacity=".35"/>
     </pattern>
@@ -88,19 +83,16 @@ MASTER'S LEVEL DIGITAL DESIGN AND FPGA ENGINEERING PROJECT   --- FPGA-Based Prog
           filter="url(#glow)"/>
     <rect x="22" y="22" width="226" height="176" rx="12"
           fill="#071326" stroke="#4654a5" stroke-width="1.5"/>
-
     <g stroke="#8b6cff" stroke-width="5">
       <path d="M35 -14V0 M75 -14V0 M115 -14V0 M155 -14V0 M195 -14V0 M235 -14V0"/>
       <path d="M35 220V234 M75 220V234 M115 220V234 M155 220V234 M195 220V234 M235 220V234"/>
       <path d="M-14 35H0 M-14 75H0 M-14 115H0 M-14 155H0 M-14 195H0"/>
       <path d="M270 35H284 M270 75H284 M270 115H284 M270 155H284 M270 195H284"/>
     </g>
-
     <text x="135" y="82" text-anchor="middle" fill="#ffffff"
           font-size="27" font-weight="bold" font-family="monospace">POWERCORE-X</text>
     <text x="135" y="112" text-anchor="middle" fill="#00eaff"
           font-size="15" font-family="monospace">VHDL • FPGA</text>
-
     <path d="M65 140H205 M65 155H205" stroke="#294a78" stroke-width="2"/>
     <text x="135" y="181" text-anchor="middle" fill="#9b8aff"
           font-size="13" font-family="monospace">50 MHz • FSM</text>
