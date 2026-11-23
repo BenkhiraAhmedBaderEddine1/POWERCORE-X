@@ -78,3 +78,145 @@ Built using VHDL-2008, the system combines finite state machine control, program
 The architecture evolves from a conventional four-phase Moore FSM waveform generator into a modular and extensible digital switching controller.
 
 CORE ENGINEERING PARAMETERS
+
+
+CORE ENGINEERING PARAMETERS
+
+Parameter
+
+Specification
+
+Project Architecture
+
+FPGA-Based Digital Controller
+
+Hardware Clock
+
+50 MHz
+
+Clock Period
+
+20 ns
+
+Control Architecture
+
+Moore Finite State Machine
+
+Hardware Description Language
+
+VHDL-2008
+
+Switching Intervals
+
+10 / 30 / 10 / 50 µs
+
+Configurable Dead-Time
+
+200 ns
+
+Protection Mechanism
+
+Fault Latching
+
+Output Architecture
+
+Complementary Digital Signals
+
+<div align="center">
+
+◈ THE FOUR-PHASE SWITCHING ENGINE
+
+100 µs Reference Switching Sequence
+
+<img src="https://img.shields.io/badge/PHASE_01-10_%CE%BCs-42E8FF?style=for-the-badge"/>
+<img src="https://img.shields.io/badge/PHASE_02-30_%CE%BCs-9B7BFF?style=for-the-badge"/>
+<img src="https://img.shields.io/badge/PHASE_03-10_%CE%BCs-42E8FF?style=for-the-badge"/>
+<img src="https://img.shields.io/badge/PHASE_04-50_%CE%BCs-FF9B45?style=for-the-badge"/>
+
+</div>
+
+DIGITAL SWITCHING SEQUENCE
+
+TIME       0       10              40      50                      100 µs
+           |--------|---------------|-------|------------------------|
+
+SIG1       ████████                 ████████
+           HIGH                     HIGH
+
+SIG2               ███████████████         ████████████████████████
+                   HIGH                     HIGH
+
+STATE      PHASE_1  PHASE_2         PHASE_3 PHASE_4
+
+
+The reference sequence above represents the original active switching intervals. In the enhanced architecture, dead-time intervals are inserted between transitions.
+
+<div align="center">
+
+◈ SYSTEM DESIGN PHILOSOPHY
+
+<img src="https://img.shields.io/badge/01-TIMING%20PRECISION-42E8FF?style=for-the-badge"/>
+<img src="https://img.shields.io/badge/02-SAFE%20SWITCHING-9B7BFF?style=for-the-badge"/>
+<img src="https://img.shields.io/badge/03-FAULT%20MANAGEMENT-FF9B45?style=for-the-badge"/>
+
+A modular architecture. A deterministic switching engine. A safety-oriented design.
+
+</div>
+
+🧬 SYSTEM ARCHITECTURE
+
+                ┌──────────────────────┐
+                │    50 MHz FPGA CLK   │
+                └──────────┬───────────┘
+                           │
+                ┌──────────▼───────────┐
+                │   TIMING MANAGER     │
+                │  Counters & Timers   │
+                └──────────┬───────────┘
+                           │
+                ┌──────────▼───────────┐
+                │     MOORE FSM        │
+                │  Four-Phase Control  │
+                └──────────┬───────────┘
+                           │
+                ┌──────────▼───────────┐
+                │    DEAD-TIME UNIT    │
+                │   200 ns Reference   │
+                └──────────┬───────────┘
+                           │
+                ┌──────────▼───────────┐
+                │   FAULT MANAGEMENT   │
+                │    Output Interlock  │
+                └──────────┬───────────┘
+                           │
+                   ┌───────┴───────┐
+                   │               │
+             ┌─────▼─────┐   ┌─────▼─────┐
+             │   SIG1    │   │   SIG2    │
+             │  GATE A   │   │  GATE B   │
+             └───────────┘   └───────────┘
+
+🛡️ SAFETY-FIRST DIGITAL CONTROL
+
+The primary digital safety invariant is:
+
+[
+Sig1 \land Sig2 = 0
+]
+
+The architecture is designed to ensure that complementary outputs are never simultaneously asserted.
+
+Additional mechanisms include:
+
+Configurable dead-time insertion.
+
+Output mutual-exclusion logic.
+
+Fault detection and latching.
+
+Controlled activation and reset.
+
+Safe output shutdown.
+
+Engineering note: Digital interlocking is not a substitute for independent gate-driver protection, electrical isolation, and hardware overcurrent protection.
+
