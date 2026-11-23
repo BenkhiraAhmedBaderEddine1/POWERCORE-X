@@ -68,3 +68,13 @@ Designing deterministic switching architectures with configurable timing, dead-t
 <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=500&size=14&duration=2500&pause=700&color=9B7BFF&center=true&vCenter=true&width=750&lines=FROM+DIGITAL+LOGIC+TO+POWER+CONVERSION;FROM+FINITE+STATE+MACHINES+TO+SAFE+SWITCHING;PRECISION+IS+NOT+OPTIONAL.+IT+IS+THE+DESIGN." />
 
 </div>
+
+⚡ PROJECT OVERVIEW
+
+POWERCORE-X is an advanced FPGA-based digital control architecture developed to generate precisely timed complementary gate-control signals for power converter switching applications.
+
+Built using VHDL-2008, the system combines finite state machine control, programmable timing counters, configurable dead-time insertion, output interlocking, and latched fault protection.
+
+The architecture evolves from a conventional four-phase Moore FSM waveform generator into a modular and extensible digital switching controller.
+
+CORE ENGINEERING PARAMETERS
