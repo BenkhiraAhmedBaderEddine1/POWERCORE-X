@@ -212,4 +212,344 @@ POWERCORE-X addresses this problem through a modular VHDL architecture based on 
 The proposed system integrates a clock-driven timing manager, a Moore finite state machine, a programmable dead-time mechanism, a fault-management block, and complementary output logic.
 
 
+<h2 align="center">04 │ PROJECT OBJECTIVES & SCOPE</h2>
 
+<p align="center">
+  <strong>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</strong>
+</p>
+
+4.1 Main Objective
+
+To design and verify an FPGA-based digital controller capable of generating accurately timed complementary gate-control signals for power converter switching applications.
+
+4.2 Specific Objectives
+
+ID
+
+Objective
+
+Engineering Purpose
+
+O1
+
+FSM Development
+
+Implement a four-phase synchronous controller
+
+O2
+
+Timing Management
+
+Generate accurate clock-based intervals
+
+O3
+
+VHDL Implementation
+
+Develop synthesizable RTL logic
+
+O4
+
+Dead-Time Insertion
+
+Introduce non-overlap intervals
+
+O5
+
+Output Interlock
+
+Prevent simultaneous output activation
+
+O6
+
+Fault Detection
+
+Identify abnormal operating conditions
+
+O7
+
+Fault Latching
+
+Retain fault status until reset
+
+O8
+
+Verification
+
+Develop automated simulation scenarios
+
+O9
+
+FPGA Preparation
+
+Prepare synthesis and hardware implementation
+
+4.3 Project Scope
+
+The project focuses on digital control architecture and RTL verification.
+
+The initial scope includes:
+
+Digital switching sequence generation.
+
+Timing-counter implementation.
+
+FSM-based control.
+
+Complementary output generation.
+
+Dead-time logic.
+
+Fault-management logic.
+
+Testbench development.
+
+Simulation and waveform analysis.
+
+The physical power converter, gate-driver circuitry, electrical isolation, and high-power experimental evaluation are separate hardware development stages.
+
+<h2 align="center">05 │ ENGINEERING REQUIREMENTS & SPECIFICATIONS</h2>
+
+<p align="center">
+  <strong>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</strong>
+</p>
+
+5.1 Functional Requirements
+
+Requirement
+
+Description
+
+Priority
+
+FR-01
+
+Generate the four-phase switching sequence
+
+High
+
+FR-02
+
+Use a synchronous 50 MHz clock reference
+
+High
+
+FR-03
+
+Support configurable phase durations
+
+High
+
+FR-04
+
+Generate complementary outputs
+
+High
+
+FR-05
+
+Insert dead-time during transitions
+
+High
+
+FR-06
+
+Disable outputs when the controller is disabled
+
+High
+
+FR-07
+
+Detect and latch fault conditions
+
+High
+
+FR-08
+
+Support reset and controlled recovery
+
+High
+
+5.2 Non-Functional Requirements
+
+Requirement
+
+Engineering Description
+
+Determinism
+
+Switching transitions follow defined clock-based logic
+
+Modularity
+
+Functional blocks are logically separated
+
+Configurability
+
+Timing parameters can be modified
+
+Synthesizability
+
+RTL must be suitable for FPGA synthesis
+
+Maintainability
+
+Code should be structured and documented
+
+Verifiability
+
+Design behavior should be testable through simulation
+
+Safety Orientation
+
+Outputs must follow defined interlocking conditions
+
+5.3 Reference Technical Parameters
+
+Parameter
+
+Value
+
+Unit
+
+FPGA Clock Frequency
+
+50
+
+MHz
+
+Clock Period
+
+20
+
+ns
+
+Phase 1
+
+10
+
+µs
+
+Phase 2
+
+30
+
+µs
+
+Phase 3
+
+10
+
+µs
+
+Phase 4
+
+50
+
+µs
+
+Active Sequence
+
+100
+
+µs
+
+Reference Dead-Time
+
+200
+
+ns
+
+Dead-Time Clock Cycles
+
+10
+
+Cycles
+
+Number of Main Phases
+
+4
+
+—
+
+HDL
+
+VHDL-2008
+
+—
+
+Control Architecture
+
+Moore FSM
+
+—
+
+<h2 align="center">06 │ ORIGINAL SYSTEM ANALYSIS</h2>
+
+<p align="center">
+  <strong>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</strong>
+</p>
+
+6.1 Original Switching Sequence
+
+The original laboratory waveform generator is based on a four-state Moore finite state machine.
+
+It generates two complementary digital control signals according to four timing intervals.
+
+Interval
+
+Duration
+
+SIG1
+
+SIG2
+
+PHASE 1
+
+10 µs
+
+1
+
+0
+
+PHASE 2
+
+30 µs
+
+0
+
+1
+
+PHASE 3
+
+10 µs
+
+1
+
+0
+
+PHASE 4
+
+50 µs
+
+0
+
+1
+
+6.2 Reference Timing Distribution
+
+flowchart LR
+    A["0 µs"] --> B["10 µs"]
+    B --> C["40 µs"]
+    C --> D["50 µs"]
+    D --> E["100 µs"]
+
+    classDef start fill:#172B46,stroke:#00BFFF,color:#FFFFFF
+    classDef phase fill:#26304D,stroke:#806CFF,color:#FFFFFF
+    classDef finish fill:#164238,stroke:#00C9A7,color:#FFFFFF
+
+    class A start
+    class B,C,D phase
+    class E finish
+
+6.3 Clock Frequency Analysis
