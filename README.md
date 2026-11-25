@@ -353,3 +353,173 @@ Actual hardware validation results should only be reported after performing the 
 <!-- ═══════════════════════════════════════════════════════════════ -->
 <!--                 END OF PROJECT OVERVIEW                         -->
 <!-- ═══════════════════════════════════════════════════════════════ -->
+
+
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!--                       02 — PROBLEM STATEMENT                   -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+
+<h1 align="center">
+  ⚡ 02 — PROBLEM STATEMENT
+</h1>
+
+<h3 align="center">
+  ENGINEERING CHALLENGE & PROPOSED DIGITAL CONTROL SOLUTION
+</h3>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/DOMAIN-Digital%20Control-red?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/PLATFORM-FPGA-orange?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/HDL-VHDL--2008-purple?style=for-the-badge" />
+</p>
+
+---
+
+### 🔴 2.1 Engineering Problem
+
+Digital switching systems require precisely timed control signals to coordinate switching operations. The accuracy, synchronization, and sequencing of these signals are essential to achieving predictable system behavior.
+
+Incorrect timing intervals, overlapping control signals, or uncontrolled state transitions may introduce undesirable operating conditions and compromise the reliability of digital switching systems.
+
+In conventional software-based control architectures, execution-time variability may arise from processor loading, interrupt handling, and software scheduling. These factors can complicate the implementation of highly deterministic timing requirements.
+
+A **Field-Programmable Gate Array (FPGA)** provides a hardware-based alternative by allowing the control sequence to be implemented directly as synchronous digital logic.
+
+POWERCORE-X addresses this engineering challenge through the development of a programmable FPGA-based digital controller designed to:
+
+- Generate a predefined multi-phase switching sequence.
+- Maintain digital mutual exclusion between `Sig1` and `Sig2`.
+- Provide deterministic state transitions using synchronous control logic.
+- Introduce configurable transition dead-time in the enhanced architecture.
+- Establish a structured foundation for additional protection-oriented features.
+
+The central engineering objective is to achieve precise, predictable, and controlled switching behavior through a dedicated digital hardware architecture.
+
+---
+
+### 🟠 2.2 Proposed Solution
+
+The proposed solution is based on a **synchronous Moore Finite State Machine (FSM)** implemented using **VHDL-2008** and targeted at the Altera/Terasic DE2 FPGA platform.
+
+A counter-based timing mechanism controls the duration of each operating phase. The FSM determines the active operating state, while the timing logic manages the transitions between successive phases.
+
+The enhanced architecture extends the original controller by introducing additional digital control mechanisms, including:
+
+- **Dead-Time Insertion:** Provides a configurable interval during which both switching-control outputs remain LOW during designated transitions.
+- **Enable Control:** Provides a mechanism for controlling whether the switching sequence is permitted to operate.
+- **Fault Latching:** Retains a detected fault condition until the defined reset or recovery procedure is applied.
+
+The overall development is organized into two independently verifiable implementations.
+
+<details>
+<summary><b>🔹 IMPLEMENTATION 01 — REFERENCE CONTROLLER</b></summary>
+
+<br/>
+
+The Reference Controller reproduces the original four-state timing sequence established in the laboratory exercise.
+
+Its primary characteristics include:
+
+- Four-state Moore FSM architecture.
+- Counter-based state-duration control.
+- Original 10 µs, 30 µs, 10 µs, and 50 µs timing intervals.
+- Two mutually exclusive digital outputs.
+- Continuous cyclic operation with a 100 µs reference period.
+
+This implementation serves as the functional baseline for subsequent development and verification.
+
+</details>
+
+<details>
+<summary><b>🔸 IMPLEMENTATION 02 — ENHANCED CONTROLLER</b></summary>
+
+<br/>
+
+The Enhanced Controller extends the reference architecture with additional digital control and protection-oriented functionality.
+
+Its development focuses on:
+
+- Configurable dead-time intervals.
+- Enable and controlled operating behavior.
+- Fault detection and fault-latching mechanisms.
+- Improved transition management.
+- Additional simulation and verification scenarios.
+
+This implementation represents the extended research-oriented version of POWERCORE-X.
+
+</details>
+
+---
+
+### 🟣 2.3 Dual-Implementation Development Strategy
+
+The separation between the reference and enhanced implementations establishes a clear verification methodology.
+
+Rather than modifying the original timing behavior without distinction, the project preserves the baseline controller and evaluates the additional functionality as a separate design extension.
+
+<table align="center">
+  <thead>
+    <tr>
+      <th align="center">DESIGN ASPECT</th>
+      <th align="center">REFERENCE</th>
+      <th align="center">ENHANCED</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Four-State FSM</td>
+      <td align="center">✓</td>
+      <td align="center">✓</td>
+    </tr>
+    <tr>
+      <td>Original Timing Sequence</td>
+      <td align="center">✓</td>
+      <td align="center">Baseline-dependent</td>
+    </tr>
+    <tr>
+      <td>Mutual Exclusion</td>
+      <td align="center">✓</td>
+      <td align="center">✓</td>
+    </tr>
+    <tr>
+      <td>Dead-Time Insertion</td>
+      <td align="center">—</td>
+      <td align="center">✓</td>
+    </tr>
+    <tr>
+      <td>Enable Control</td>
+      <td align="center">—</td>
+      <td align="center">✓</td>
+    </tr>
+    <tr>
+      <td>Fault Latching</td>
+      <td align="center">—</td>
+      <td align="center">✓</td>
+    </tr>
+  </tbody>
+</table>
+
+---
+
+<p align="center">
+  <b>FROM TIMING-BASED DIGITAL LOGIC TO SAFETY-ORIENTED FPGA CONTROL</b>
+</p>
+
+<p align="center">
+  <code>DETERMINISTIC TIMING</code>
+  &nbsp;◆&nbsp;
+  <code>MUTUAL EXCLUSION</code>
+  &nbsp;◆&nbsp;
+  <code>DEAD-TIME</code>
+  &nbsp;◆&nbsp;
+  <code>FAULT MANAGEMENT</code>
+</p>
+
+<h3 align="center">
+  POWERCORE-X | ENGINEERING DESIGN & DEVELOPMENT
+</h3>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!--                    END OF SECTION 02                           -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
