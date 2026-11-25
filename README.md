@@ -1,4 +1,4 @@
-------
+--------
 ## ⚡ POWERCORE-X — FPGA Power Electronics Controller
 
 <p align="center">
