@@ -836,7 +836,7 @@ The reference and enhanced implementations can be evaluated separately through s
 <!-- ═══════════════════════════════════════════════════════════════ -->
 
 flowchart TB
-
+```
     %% ================= SYSTEM CLOCK =================
     CLK["50 MHz Clock"]
     CR["Clock and Reset Interface"]
@@ -907,3 +907,4 @@ flowchart TB
 
     %% ================= LINK STYLING =================
     linkStyle default stroke:#A6A6A6,stroke-width:1.3px;
+```
