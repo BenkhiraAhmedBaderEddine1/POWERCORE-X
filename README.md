@@ -911,4 +911,16 @@ flowchart TB
     %% ================= LINK STYLING =================
     linkStyle default stroke:#A6A6A6,stroke-width:1.3px; 
 ```
-```
+
+
+<p align="center">
+  <b>Figure 4.1 — POWERCORE-X High-Level Functional Block Diagram</b>
+</p>
+
+<p align="center">
+  <i>
+    Modular FPGA architecture illustrating clock synchronization,
+    timing generation, state sequencing, transition control,
+    fault management, and digital output interfacing.
+  </i>
+</p>
