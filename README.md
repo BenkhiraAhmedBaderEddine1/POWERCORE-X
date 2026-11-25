@@ -525,37 +525,312 @@ Rather than modifying the original timing behavior without distinction, the proj
 <!-- ═══════════════════════════════════════════════════════════════ -->
 
 
-03 — PROJECT OBJECTIVES
-The main objectives of POWERCORE-X are:
-1. Develop a deterministic FPGA-based digital controller.
-2. Reproduce the original four-state waveform sequence.
-3. Implement accurate timing using a 50 MHz system clock.
-4. Design a Moore FSM using VHDL-2008.
-5. Guarantee digital mutual exclusion between Sig1 and Sig2.
-6. Introduce configurable dead-time between switching phases.
-7. Implement enable and disable functionality.
-8. Develop a latched fault mechanism.
-9. Verify the design through self-checking VHDL testbenches.
-10. Evaluate the design through FPGA synthesis and hardware testing.
-11. Compare the reference and enhanced architectures.
-12. Establish a foundation for more advanced FPGA-based power-control research.
-3.1 Research Questions
-The project investigates the following questions:
-- Can a synchronous Moore FSM reproduce the required switching sequence with deterministic timing?
-- How can dead-time be inserted without generating overlapping output signals?
-- How can a fault condition force the controller into a non-switching state?
-- What is the impact of the enhanced architecture on FPGA resource utilization?
-- How closely do simulated timing results correspond to physical FPGA measurements?
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!--                      03 — PROJECT OBJECTIVES                   -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
 
-04 — SYSTEM ARCHITECTURE
-4.1 High-Level Architecture
+<h1 align="center">
+  🎯 03 — PROJECT OBJECTIVES
+</h1>
+
+<h3 align="center">
+  ENGINEERING GOALS • DESIGN TARGETS • RESEARCH QUESTIONS
+</h3>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/OBJECTIVES-12-red?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/RESEARCH-DRIVEN-orange?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/VERIFICATION-FPGA-purple?style=for-the-badge" />
+</p>
+
+---
+
+### 🔴 3.1 Primary Project Objectives
+
+The primary objective of **POWERCORE-X** is to design, implement, and evaluate a deterministic FPGA-based digital switching controller using VHDL-2008.
+
+The project combines synchronous finite-state-machine design, precise timing generation, digital output interlocking, and protection-oriented control mechanisms.
+
+The following objectives define the technical scope of the project:
+
+<table align="center">
+  <thead>
+    <tr>
+      <th align="center">NO.</th>
+      <th align="left">ENGINEERING OBJECTIVE</th>
+      <th align="center">DOMAIN</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="center">01</td>
+      <td>Develop a deterministic FPGA-based digital controller.</td>
+      <td align="center">FPGA Design</td>
+    </tr>
+    <tr>
+      <td align="center">02</td>
+      <td>Reproduce the original four-state waveform sequence.</td>
+      <td align="center">Waveform Generation</td>
+    </tr>
+    <tr>
+      <td align="center">03</td>
+      <td>Implement accurate timing using a 50 MHz system clock.</td>
+      <td align="center">Digital Timing</td>
+    </tr>
+    <tr>
+      <td align="center">04</td>
+      <td>Design a Moore FSM using VHDL-2008.</td>
+      <td align="center">RTL Architecture</td>
+    </tr>
+    <tr>
+      <td align="center">05</td>
+      <td>Guarantee digital mutual exclusion between <code>Sig1</code> and <code>Sig2</code>.</td>
+      <td align="center">Output Safety</td>
+    </tr>
+    <tr>
+      <td align="center">06</td>
+      <td>Introduce configurable dead-time between switching phases.</td>
+      <td align="center">Transition Control</td>
+    </tr>
+    <tr>
+      <td align="center">07</td>
+      <td>Implement enable and disable functionality.</td>
+      <td align="center">System Control</td>
+    </tr>
+    <tr>
+      <td align="center">08</td>
+      <td>Develop a latched fault mechanism.</td>
+      <td align="center">Fault Management</td>
+    </tr>
+    <tr>
+      <td align="center">09</td>
+      <td>Verify the design through self-checking VHDL testbenches.</td>
+      <td align="center">Simulation</td>
+    </tr>
+    <tr>
+      <td align="center">10</td>
+      <td>Evaluate the design through FPGA synthesis and hardware testing.</td>
+      <td align="center">Hardware Validation</td>
+    </tr>
+    <tr>
+      <td align="center">11</td>
+      <td>Compare the reference and enhanced architectures.</td>
+      <td align="center">Performance Analysis</td>
+    </tr>
+    <tr>
+      <td align="center">12</td>
+      <td>Establish a foundation for more advanced FPGA-based power-control research.</td>
+      <td align="center">Future Research</td>
+    </tr>
+  </tbody>
+</table>
+
+---
+
+### 🟠 3.2 Research Questions
+
+Beyond the implementation objectives, POWERCORE-X investigates several engineering questions concerning deterministic digital control, switching safety, and FPGA implementation efficiency.
+
+These questions establish the technical direction of the project and provide a framework for evaluating its results.
+
+**RQ-01 — Deterministic State Sequencing**
+
+Can a synchronous Moore Finite State Machine reproduce the required switching sequence with deterministic timing?
+
+**RQ-02 — Dead-Time Implementation**
+
+How can dead-time be inserted between switching phases without generating overlapping output signals?
+
+**RQ-03 — Fault Response**
+
+How can a detected fault condition force the controller into a non-switching state and prevent further switching activity?
+
+**RQ-04 — FPGA Resource Utilization**
+
+What is the impact of the enhanced architecture on FPGA resource utilization compared with the reference implementation?
+
+**RQ-05 — Simulation-to-Hardware Correlation**
+
+How closely do simulated timing results correspond to physical FPGA measurements?
+
+---
+
+### 🟣 3.3 Project Evaluation Criteria
+
+The project objectives and research questions establish the following evaluation dimensions:
+
+| EVALUATION AREA | EXPECTED VERIFICATION |
+|:---|:---|
+| Functional Correctness | Correct execution of the four-state sequence |
+| Timing Accuracy | Verification of state durations and repetition period |
+| Output Mutual Exclusion | No simultaneous HIGH condition on both outputs |
+| Dead-Time Behavior | Verification of configured non-overlap intervals |
+| Fault Handling | Verification of fault detection and output shutdown |
+| RTL Verification | Self-checking simulation testbenches |
+| Hardware Implementation | FPGA synthesis and physical testing |
+| Resource Analysis | Comparison of synthesis reports |
+
+The evaluation criteria define what must be tested; they do not represent experimental results or confirmed hardware performance.
+
+---
+
+<p align="center">
+  <b>12 ENGINEERING OBJECTIVES</b><br/>
+  <code>DESIGN</code> ◆ <code>IMPLEMENTATION</code> ◆ <code>VERIFICATION</code> ◆ <code>EVALUATION</code>
+</p>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!--                    END OF SECTION 03                           -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!--                       04 — SYSTEM ARCHITECTURE                  -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+
+<h1 align="center">
+  🏗️ 04 — SYSTEM ARCHITECTURE
+</h1>
+
+<h3 align="center">
+  MODULAR FPGA DESIGN • DIGITAL CONTROL • FUNCTIONAL ORGANIZATION
+</h3>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/ARCHITECTURE-MODULAR-red?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/CONTROL-MOORE%20FSM-orange?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/IMPLEMENTATION-VHDL--2008-purple?style=for-the-badge" />
+</p>
+
+---
+
+### 🔴 4.1 High-Level Architecture
+
+POWERCORE-X is organized into a set of functional digital blocks, each responsible for a specific part of the controller's operation.
+
+The architecture separates timing generation, state sequencing, output decoding, transition management, and fault-related logic into identifiable functional units.
+
+This modular organization improves design readability, supports independent verification, and provides a structured foundation for comparing the reference and enhanced implementations.
+
 The system consists of the following functional blocks:
-1. Clock and reset interface.
-2. Timing counter.
-3. Finite State Machine.
-4. Moore output decoder.
-5. Dead-time generator.
-6. Fault-latching mechanism.
-7. Output safety gating.
-8. FPGA input/output interface.
-4.2 Functional Block Diagram
+
+| NO. | FUNCTIONAL BLOCK | PRIMARY RESPONSIBILITY |
+|:---:|:---|:---|
+| 01 | Clock and Reset Interface | Provides the system clock and initialization control |
+| 02 | Timing Counter | Measures clock cycles and controls timing intervals |
+| 03 | Finite State Machine | Determines the current operating phase and next state |
+| 04 | Moore Output Decoder | Generates state-dependent switching commands |
+| 05 | Dead-Time Generator | Introduces configurable non-overlap intervals |
+| 06 | Fault-Latching Mechanism | Retains detected fault conditions |
+| 07 | Output Safety Gating | Controls output permission and switching inhibition |
+| 08 | FPGA Input/Output Interface | Connects the internal controller to external FPGA pins |
+
+---
+
+### 🟠 4.2 Functional Block Diagram
+
+The following conceptual diagram illustrates the functional organization of the POWERCORE-X controller and the relationship between its principal modules.
+
+```mermaid
+flowchart TB
+
+    subgraph INPUTS["SYSTEM INPUTS"]
+        CLK["50 MHz System Clock"]
+        RST["Reset"]
+        EN["Enable / Disable"]
+        FLT["Fault Input"]
+    end
+
+    subgraph CONTROL["CORE DIGITAL CONTROL"]
+        CI["Clock & Reset Interface"]
+        TC["Timing Counter"]
+        FSM["Moore Finite State Machine"]
+        DEC["Moore Output Decoder"]
+    end
+
+    subgraph SAFETY["ENHANCED CONTROL & PROTECTION"]
+        DT["Dead-Time Generator"]
+        FL["Fault-Latching Mechanism"]
+        SG["Output Safety Gating"]
+    end
+
+    subgraph OUTPUTS["FPGA OUTPUT INTERFACE"]
+        IO["FPGA I/O Interface"]
+        S1["Sig1"]
+        S2["Sig2"]
+    end
+
+    CLK --> CI
+    RST --> CI
+
+    CI --> TC
+    CI --> FSM
+
+    TC --> FSM
+    FSM --> DEC
+
+    DEC --> DT
+    DT --> SG
+
+    FLT --> FL
+    FL --> SG
+    EN --> SG
+
+    SG --> IO
+    IO --> S1
+    IO --> S2
+
+    classDef input fill:#202b3d,stroke:#38bdf8,color:#ffffff,stroke-width:2px;
+    classDef core fill:#30204a,stroke:#a78bfa,color:#ffffff,stroke-width:2px;
+    classDef safety fill:#4a2028,stroke:#fb7185,color:#ffffff,stroke-width:2px;
+    classDef output fill:#3b2b17,stroke:#fb923c,color:#ffffff,stroke-width:2px;
+
+    class CLK,RST,EN,FLT input;
+    class CI,TC,FSM,DEC core;
+    class DT,FL,SG safety;
+    class IO,S1,S2 output;
+```
+
+---
+
+### 🟣 4.3 Architectural Design Principles
+
+The architecture follows several important digital-design principles:
+
+**1. Synchronous Operation**
+
+The controller uses a common system clock to coordinate sequential state updates and timing operations.
+
+**2. Functional Separation**
+
+Timing generation, state sequencing, output decoding, and protection-related functions are organized into distinct functional blocks.
+
+**3. Deterministic State Control**
+
+The Moore FSM defines the operating phase, while the timing counter determines when a state transition is permitted.
+
+**4. Output Interlocking**
+
+The output-control architecture is designed to prevent `Sig1` and `Sig2` from being asserted simultaneously.
+
+**5. Protection-Oriented Operation**
+
+The enhanced architecture introduces dead-time and fault-latching functionality to improve switching-control behavior.
+
+**6. Independent Verification**
+
+The reference and enhanced implementations can be evaluated separately through simulation, synthesis, and hardware testing.
+
+---
+
+<p align="center">
+  <b>POWERCORE-X — MODULAR DIGITAL CONTROL ARCHITECTURE</b>
+</p>
+
+<p align="center">
+  <code>CLOCK</code> → <code>TIMING</code> → <code>FSM</code> → <code>SAFETY LOGIC</code> → <code>OUTPUTS</code>
+</p>
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!--                    END OF SECTION 04                           -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
