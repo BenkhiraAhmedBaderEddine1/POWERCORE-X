@@ -523,3 +523,39 @@ Rather than modifying the original timing behavior without distinction, the proj
 <!-- ═══════════════════════════════════════════════════════════════ -->
 <!--                    END OF SECTION 02                           -->
 <!-- ═══════════════════════════════════════════════════════════════ -->
+
+
+03 — PROJECT OBJECTIVES
+The main objectives of POWERCORE-X are:
+1. Develop a deterministic FPGA-based digital controller.
+2. Reproduce the original four-state waveform sequence.
+3. Implement accurate timing using a 50 MHz system clock.
+4. Design a Moore FSM using VHDL-2008.
+5. Guarantee digital mutual exclusion between Sig1 and Sig2.
+6. Introduce configurable dead-time between switching phases.
+7. Implement enable and disable functionality.
+8. Develop a latched fault mechanism.
+9. Verify the design through self-checking VHDL testbenches.
+10. Evaluate the design through FPGA synthesis and hardware testing.
+11. Compare the reference and enhanced architectures.
+12. Establish a foundation for more advanced FPGA-based power-control research.
+3.1 Research Questions
+The project investigates the following questions:
+- Can a synchronous Moore FSM reproduce the required switching sequence with deterministic timing?
+- How can dead-time be inserted without generating overlapping output signals?
+- How can a fault condition force the controller into a non-switching state?
+- What is the impact of the enhanced architecture on FPGA resource utilization?
+- How closely do simulated timing results correspond to physical FPGA measurements?
+
+04 — SYSTEM ARCHITECTURE
+4.1 High-Level Architecture
+The system consists of the following functional blocks:
+1. Clock and reset interface.
+2. Timing counter.
+3. Finite State Machine.
+4. Moore output decoder.
+5. Dead-time generator.
+6. Fault-latching mechanism.
+7. Output safety gating.
+8. FPGA input/output interface.
+4.2 Functional Block Diagram
