@@ -834,3 +834,76 @@ The reference and enhanced implementations can be evaluated separately through s
 <!-- ═══════════════════════════════════════════════════════════════ -->
 <!--                    END OF SECTION 04                           -->
 <!-- ═══════════════════════════════════════════════════════════════ -->
+
+flowchart TB
+
+    %% ================= SYSTEM CLOCK =================
+    CLK["50 MHz Clock"]
+    CR["Clock and Reset Interface"]
+    TC["Timing Counter"]
+
+    %% ================= CORE CONTROLLER =================
+    FSM["Moore Finite State Machine"]
+    PHASE["Phase Control Logic"]
+
+    %% ================= TRANSITION AND SAFETY INPUTS =================
+    DT["Dead-Time Generator"]
+    EN["Enable Input"]
+    FI["Fault Input"]
+
+    %% ================= CONTROL AND SAFETY =================
+    SAFE["Control and Safety Logic"]
+
+    %% ================= OUTPUT CONTROL =================
+    DEC["Output Decoder"]
+    RUN["Running Status"]
+    FSTATUS["Fault Status"]
+
+    %% ================= EXTERNAL OUTPUTS =================
+    SIG1["Sig1"]
+    SIG2["Sig2"]
+
+    FPGA["DE2 FPGA Output Interface"]
+
+    %% ================= MAIN CONTROL FLOW =================
+    CLK --> CR
+    CR --> TC
+    TC --> FSM
+    FSM --> PHASE
+    PHASE --> DT
+
+    %% ================= SAFETY INPUT CONNECTIONS =================
+    DT --> SAFE
+    EN --> SAFE
+    FI --> SAFE
+
+    %% ================= OUTPUT AND STATUS LOGIC =================
+    SAFE --> DEC
+    SAFE --> RUN
+    SAFE --> FSTATUS
+
+    %% ================= SWITCHING OUTPUTS =================
+    DEC --> SIG1
+    DEC --> SIG2
+
+    %% ================= FPGA INTERFACE =================
+    SIG1 --> FPGA
+    SIG2 --> FPGA
+    RUN --> FPGA
+    FSTATUS --> FPGA
+
+    %% ================= NODE STYLING =================
+    classDef clock fill:#052B4D,stroke:#17608F,color:#A7D8FF,stroke-width:1.5px;
+    classDef core fill:#052B4D,stroke:#17608F,color:#A7D8FF,stroke-width:1.5px;
+    classDef safety fill:#052B4D,stroke:#17608F,color:#A7D8FF,stroke-width:1.5px;
+    classDef outputs fill:#052B4D,stroke:#17608F,color:#A7D8FF,stroke-width:1.5px;
+    classDef interface fill:#06365C,stroke:#38A3E0,color:#FFFFFF,stroke-width:2px;
+
+    class CLK,CR,TC clock;
+    class FSM,PHASE,DEC core;
+    class DT,EN,FI,SAFE safety;
+    class RUN,FSTATUS,SIG1,SIG2 outputs;
+    class FPGA interface;
+
+    %% ================= LINK STYLING =================
+    linkStyle default stroke:#A6A6A6,stroke-width:1.3px;
